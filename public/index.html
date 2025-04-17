@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light Landing - Платформа для покупки самолетов</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-left">
+        <button class="burger-btn" id="burgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="/" class="logo">
+          <img src="/images/logo.svg" alt="Light Landing Logo">
+          <span>Light Landing</span>
+        </a>
+      </div>
+      <nav class="header-nav">
+        <a href="/logout" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Выход</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <aside class="aside">
+      <nav>
+        <a href="/requests/new" class="nav-link">
+          <i class="fas fa-plus"></i>
+          <span>Новый запрос</span>
+        </a>
+        <a href="/requests/active" class="nav-link active">
+          <i class="fas fa-list"></i>
+          <span>Активные запросы</span>
+        </a>
+        <a href="/requests/archive" class="nav-link">
+          <i class="fas fa-archive"></i>
+          <span>Архив</span>
+        </a>
+        <a href="/settings" class="nav-link">
+          <i class="fas fa-cog"></i>
+          <span>Настройки</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="filters-section">
+        <button class="filters-toggle">
+          <span>Фильтры поиска</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="filters-content">
+          <h2 class="section-title">Фильтры поиска</h2>
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label class="label">Категория и модель</label>
+              <select id="aircraft-category" class="filter-select">
+                <option value="">Все категории</option>
+                <option value="aircraft">Самолеты</option>
+                <option value="helicopter">Вертолеты</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="label">Год выпуска</label>
+              <select id="year-range" class="filter-select">
+                <option value="">Любой год</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="label">Цена</label>
+              <select id="price-range" class="filter-select">
+                <option value="">Любая цена</option>
+                <option value="0-1000000">До 1 млн ₽</option>
+                <option value="1000000-5000000">1-5 млн ₽</option>
+                <option value="5000000+">От 5 млн ₽</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="label">Состояние</label>
+              <select id="condition" class="filter-select">
+                <option value="">Любое состояние</option>
+                <option value="new">Новая</option>
+                <option value="used">Б/У</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="label">Пассажировместимость</label>
+              <select id="capacity" class="filter-select">
+                <option value="">Любая вместимость</option>
+                <option value="1-4">1-4 пассажира</option>
+                <option value="5-9">5-9 пассажиров</option>
+                <option value="10+">10+ пассажиров</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="label">Дальность полета</label>
+              <select id="range" class="filter-select">
+                <option value="">Любая дальность</option>
+                <option value="0-1000">До 1000 км</option>
+                <option value="1000-3000">1000-3000 км</option>
+                <option value="3000+">Более 3000 км</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="label">Регион</label>
+              <select id="region" class="filter-select">
+                <option value="">Все регионы</option>
+                <option value="europe">Европа</option>
+                <option value="asia">Азия</option>
+                <option value="america">Америка</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label class="label">Сегмент рынка</label>
+              <select id="market-segment" class="filter-select">
+                <option value="">Все сегменты</option>
+                <option value="private">Частный</option>
+                <option value="commercial">Коммерческий</option>
+                <option value="military">Военный</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filters-actions">
+            <button id="resetFilters" class="btn-secondary">Сбросить</button>
+            <button id="applyFilters" class="btn-primary">Применить</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="requests-grid" id="requestsList">
+        <!-- Группа самолетов -->
+        <div class="group-card">
+          <div class="group-header">
+            <h3 class="group-title">Самолеты</h3>
+            <span class="group-count">8 запросов</span>
+          </div>
+          
+          <!-- Карточки самолетов -->
+          <div class="cards-container">
+            <!-- Карточка 1 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar">ИИ</div>
+                <div class="card-title">
+                  <h4>Иван Иванов</h4>
+                  <p class="card-subtitle">Менеджер по закупкам</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="price">5 000 000 ₽</div>
+                <h5 class="model-title">
+                  <i class="fas fa-plane"></i>
+                  Ищу: Cessna 172 Skyhawk
+                </h5>
+                <div class="tags">
+                  <a href="/search?model=cessna-172" class="tag">
+                    <i class="fas fa-tag"></i>
+                    Cessna 172
+                  </a>
+                  <a href="/search?category=single-engine" class="tag">
+                    <i class="fas fa-plane"></i>
+                    Одномоторный
+                  </a>
+                  <a href="/search?capacity=4" class="tag">
+                    <i class="fas fa-users"></i>
+                    4 места
+                  </a>
+                </div>
+                <p class="description">Ищу легкий самолет для частного использования. Требования: вместимость 4-6 человек, дальность полета не менее 1000 км.</p>
+                <div class="metadata">
+                  <div class="metadata-item">
+                    <span class="metadata-label">Год выпуска</span>
+                    <span class="metadata-value">2020</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Состояние</span>
+                    <span class="metadata-value">Новая</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Регион</span>
+                    <span class="metadata-value">Европа</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-primary">Откликнуться</button>
+              </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar">ПС</div>
+                <div class="card-title">
+                  <h4>Петр Сидоров</h4>
+                  <p class="card-subtitle">Директор авиакомпании</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="price">15 000 000 ₽</div>
+                <h5 class="model-title">
+                  <i class="fas fa-plane"></i>
+                  Ищу: Gulfstream G650
+                </h5>
+                <div class="tags">
+                  <a href="/search?model=gulfstream-g650" class="tag">
+                    <i class="fas fa-tag"></i>
+                    Gulfstream G650
+                  </a>
+                  <a href="/search?category=business-jet" class="tag">
+                    <i class="fas fa-plane"></i>
+                    Бизнес-джет
+                  </a>
+                  <a href="/search?capacity=19" class="tag">
+                    <i class="fas fa-users"></i>
+                    19 мест
+                  </a>
+                </div>
+                <p class="description">Требуется бизнес-джет для корпоративных перелетов. Приоритет: комфорт и надежность.</p>
+                <div class="metadata">
+                  <div class="metadata-item">
+                    <span class="metadata-label">Год выпуска</span>
+                    <span class="metadata-value">2019</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Состояние</span>
+                    <span class="metadata-value">Б/У</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Регион</span>
+                    <span class="metadata-value">Азия</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-primary">Откликнуться</button>
+              </div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar">АК</div>
+                <div class="card-title">
+                  <h4>Анна Козлова</h4>
+                  <p class="card-subtitle">Частный пилот</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="price">3 500 000 ₽</div>
+                <p class="description">Ищу учебный самолет для летной школы. Важны надежность и экономичность.</p>
+                <div class="metadata">
+                  <div class="metadata-item">
+                    <span class="metadata-label">Год выпуска</span>
+                    <span class="metadata-value">2018</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Состояние</span>
+                    <span class="metadata-value">Б/У</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Регион</span>
+                    <span class="metadata-value">Россия</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-primary">Откликнуться</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Пагинация для самолетов -->
+          <div class="pagination">
+            <a href="#" class="pagination-item disabled">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+            <a href="#" class="pagination-item active">1</a>
+            <a href="#" class="pagination-item">2</a>
+            <a href="#" class="pagination-item">3</a>
+            <span class="pagination-ellipsis">...</span>
+            <a href="#" class="pagination-item">4</a>
+            <a href="#" class="pagination-item">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Группа вертолетов -->
+        <div class="group-card">
+          <div class="group-header">
+            <h3 class="group-title">Вертолеты</h3>
+            <span class="group-count">7 запросов</span>
+          </div>
+          
+          <!-- Карточки вертолетов -->
+          <div class="cards-container">
+            <!-- Карточка 1 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar">МП</div>
+                <div class="card-title">
+                  <h4>Михаил Петров</h4>
+                  <p class="card-subtitle">Глава МЧС</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="price">25 000 000 ₽</div>
+                <h5 class="model-title">
+                  <i class="fas fa-helicopter"></i>
+                  Ищу: Airbus H145
+                </h5>
+                <div class="tags">
+                  <a href="/search?model=airbus-h145" class="tag">
+                    <i class="fas fa-tag"></i>
+                    Airbus H145
+                  </a>
+                  <a href="/search?category=rescue" class="tag">
+                    <i class="fas fa-helicopter"></i>
+                    Спасательный
+                  </a>
+                  <a href="/search?capacity=9" class="tag">
+                    <i class="fas fa-users"></i>
+                    9 мест
+                  </a>
+                </div>
+                <p class="description">Требуется спасательный вертолет для операций в горной местности.</p>
+                <div class="metadata">
+                  <div class="metadata-item">
+                    <span class="metadata-label">Год выпуска</span>
+                    <span class="metadata-value">2021</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Состояние</span>
+                    <span class="metadata-value">Новая</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Регион</span>
+                    <span class="metadata-value">Россия</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-primary">Откликнуться</button>
+              </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar">ЕВ</div>
+                <div class="card-title">
+                  <h4>Елена Воробьева</h4>
+                  <p class="card-subtitle">Директор турагентства</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="price">8 000 000 ₽</div>
+                <p class="description">Ищу вертолет для экскурсионных полетов. Важна пассажировместимость и комфорт.</p>
+                <div class="metadata">
+                  <div class="metadata-item">
+                    <span class="metadata-label">Год выпуска</span>
+                    <span class="metadata-value">2020</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Состояние</span>
+                    <span class="metadata-value">Новая</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Регион</span>
+                    <span class="metadata-value">Европа</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-primary">Откликнуться</button>
+              </div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar">ДС</div>
+                <div class="card-title">
+                  <h4>Дмитрий Соколов</h4>
+                  <p class="card-subtitle">Частный предприниматель</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="price">12 000 000 ₽</div>
+                <p class="description">Требуется вертолет для бизнес-перелетов. Приоритет: скорость и комфорт.</p>
+                <div class="metadata">
+                  <div class="metadata-item">
+                    <span class="metadata-label">Год выпуска</span>
+                    <span class="metadata-value">2019</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Состояние</span>
+                    <span class="metadata-value">Б/У</span>
+                  </div>
+                  <div class="metadata-item">
+                    <span class="metadata-label">Регион</span>
+                    <span class="metadata-value">Америка</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-primary">Откликнуться</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Пагинация для вертолетов -->
+          <div class="pagination">
+            <a href="#" class="pagination-item disabled">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+            <a href="#" class="pagination-item active">1</a>
+            <a href="#" class="pagination-item">2</a>
+            <a href="#" class="pagination-item">3</a>
+            <span class="pagination-ellipsis">...</span>
+            <a href="#" class="pagination-item">3</a>
+            <a href="#" class="pagination-item">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about">О компании</a>
+        <a href="/contacts">Контакты</a>
+        <a href="/privacy">Политика конфиденциальности</a>
+        <a href="/terms">Условия использования</a>
+      </div>
+      <p>&copy; 2024 Light Landing. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="/js/data.js"></script>
+  <script src="/js/mockData.js"></script>
+  <script src="/js/filters.js"></script>
+</body>
+</html> 

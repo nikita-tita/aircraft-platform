@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Фон -->
+    <rect width="40" height="40" rx="8" fill="#2563EB"/>
+    
+    <!-- Самолет -->
+    <path d="M20 10L25 15H15L20 10Z" fill="white"/>
+    <path d="M15 15H25L20 30L15 15Z" fill="white"/>
+    
+    <!-- Крылья -->
+    <path d="M10 20H30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M12 17H28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M12 23H28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</svg> 
